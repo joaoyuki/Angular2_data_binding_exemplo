@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'contador',
@@ -11,6 +11,9 @@ export class OutputPropertyComponent implements OnInit {
 
   @Output() mudouValor = new EventEmitter();
 
+  //@ViewChild('campoInput') campoValorInput: HTMLElement; //Olhando no console.log, viemos que esse componente na verdade é um ElementRef
+  @ViewChild('campoInput') campoValorInput: ElementRef;
+
   constructor() { }
 
   ngOnInit() {
@@ -18,6 +21,7 @@ export class OutputPropertyComponent implements OnInit {
 
 
   incrementa(){
+    console.log(this.campoValorInput.nativeElement.value);
     this.valor++;
     this.mudouValor.emit({novoValor: this.valor});
   }
